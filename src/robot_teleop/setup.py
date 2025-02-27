@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'keyboard_node = robot_teleop.keyboard_node:main',
         ],
     },
 )

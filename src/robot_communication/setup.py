@@ -18,7 +18,8 @@ setup(
     description='TODO: Package description',
     license='TODO: License declaration',
     entry_points={
-        'console_scripts': [
-        ],
+    'console_scripts': [
+        'udp_node = robot_communication.udp_node:main',
+    ],
     },
 )

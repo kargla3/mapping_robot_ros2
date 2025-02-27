@@ -1,0 +1,6 @@
+lidar_data: /lidar_raw
+laser_scan: /scan
+angle_min: 3.141592653589793
+angle_max: -3.141592653589793
+range_min: 0.1
+range_max: 8.0
