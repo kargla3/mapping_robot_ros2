@@ -1,0 +1,5 @@
+odometry_node:
+  ros__parameters:
+    odometry_topic: /odom
+    wheels_velocity_topic: /wheels_vel_raw
+    wheel_base: 0.2

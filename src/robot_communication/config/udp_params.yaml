@@ -1,3 +1,8 @@
-udp_port_recv: 5005  # Port, na którym ESP32 wysyła dane
-udp_port_send: 5005  # Port, na który ESP32 ma odbierać dane
-udp_ip: "192.168.4.1"  # IP ESP32
+udp_node:
+  ros__parameters:
+    udp_port_recv: 5005  # Port, na którym ESP32 wysyła dane
+    udp_port_send: 5005  # Port, na który ESP32 ma odbierać dane
+    udp_ip: "192.168.4.1"  # IP ESP32
+    lidar_data: /lidar_raw
+    wheels_velocity_data: /wheels_vel_raw
+    control_movement_topic: /keyboard_move

@@ -14,21 +14,21 @@ class UdpNode(Node):
         self.declare_parameter('udp_port_send', 5005)
         self.declare_parameter('udp_ip', '192.168.4.1')
         self.declare_parameter('lidar_data', '/lidar_raw')
-        self.declare_parameter('velocity_data', '/vel_raw')
+        self.declare_parameter('wheels_velocity_data', '/wheels_vel_raw')
         self.declare_parameter('control_movement_topic', '/keyboard_move')
 
         self.udp_port_recv = self.get_parameter('udp_port_recv').value
         self.udp_port_send = self.get_parameter('udp_port_send').value
         self.udp_ip = self.get_parameter('udp_ip').value
         self.lidar_data = self.get_parameter('lidar_data').value
-        self.velocity_data = self.get_parameter('velocity_data').value
+        self.wheels_velocity_data = self.get_parameter('wheels_velocity_data').value
         self.control_movement_topic = self.get_parameter('control_movement_topic').value
 
         self.get_logger().info(f"UDP IP: {self.udp_ip}")
         self.get_logger().info(f"UDP Port (recv): {self.udp_port_recv}")
         self.get_logger().info(f"UDP Port (send): {self.udp_port_send}")
         self.get_logger().info(f"Lidar raw data topic: {self.lidar_data}")
-        self.get_logger().info(f"Velocity raw data topic: {self.velocity_data}")
+        self.get_logger().info(f"Wheels velocity raw data topic: {self.wheels_velocity_data}")
         self.get_logger().info(f"Movement controller topic: {self.control_movement_topic}")
 
         self.sock_recv = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -36,7 +36,7 @@ class UdpNode(Node):
         self.sock_send = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
         self.lidar_publisher_ = self.create_publisher(String, self.lidar_data, 100)
-        self.vel_publisher_ = self.create_publisher(String, self.velocity_data, 100)
+        self.vel_publisher_ = self.create_publisher(String, self.wheels_velocity_data, 100)
         self.subscription = self.create_subscription(String, self.control_movement_topic, self.control_callback, 100)
 
         self.running = True
@@ -56,8 +56,8 @@ class UdpNode(Node):
                 if msg.data.startswith("lidar/"):
                     msg.data = msg.data.replace("lidar/", "", 1).strip()
                     self.lidar_publisher_.publish(msg)
-                elif msg.data.startswith("vel/"):
-                    msg.data = msg.data.replace("vel/", "", 1).strip()
+                elif msg.data.startswith("wheels/"):
+                    msg.data = msg.data.replace("wheels/", "", 1).strip()
                     self.vel_publisher_.publish(msg)
                 else:
                     self.get_logger().info(f"Nieznany typ danych: {msg.data}")

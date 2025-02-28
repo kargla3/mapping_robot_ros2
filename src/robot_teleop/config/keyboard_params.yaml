@@ -1,0 +1,4 @@
+keyboard_node:
+  ros__parameters:
+    cmd_vel: /cmd_vel
+    move_topic: /keyboard_move

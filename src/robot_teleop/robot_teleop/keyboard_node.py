@@ -35,7 +35,7 @@ class KeyboardNode(Node):
 
     def timer_callback(self):
         """Jeśli minęła więcej niż 1 sekunda od ostatniego odbioru, wyślij 0.0 0.0"""
-        if time() - self.last_received_time > 0.2:  # Sprawdź, czy minęła sekunda
+        if time() - self.last_received_time > 0.5:
             self.msg.data = "keyboard/0.0 0.0"
             self.publisher_.publish(self.msg)
             self.get_logger().info("Published 0.0 0.0 because no message received")
